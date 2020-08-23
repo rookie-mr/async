@@ -1,0 +1,19 @@
+{
+  "name": "normal-async",
+  "version": "1.0.1",
+  "description": "Promise 语法糖可用于不支持Promise的浏览器环境，与Promise遵循一致的语法规则。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rookie-mr/async.git"
+  },
+  "author": "zhanggp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rookie-mr/async/issues"
+  },
+  "homepage": "https://github.com/rookie-mr/async#readme"
+}
