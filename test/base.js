@@ -1,3 +1,4 @@
+var Async = require('../index.js')
 var async = new Async(function (resolve, reject) {
     setTimeout(function () {
         resolve(9527)
