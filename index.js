@@ -1,29 +1,37 @@
 var Async = function (fn) {
     this.name = 'Async'
     this._state = 'pendding'
+    this._resolve = []
     if (typeof fn !== 'function') {
         throw new Error('The Param Of Async Must Be Typeof Function !')
         return null
     }
     var resolve = (function (data) {
+        if (this._state !== 'pendding') throw new Error('State Can Not Be Modify!')
         this._state = 'fulfilled'
-        typeof this._resolve === 'function' && this._resolve(data) 
-        return this
+        // typeof this._resolve === 'function' && this._resolve(data)
+        // 支持 then 的链式调用
+        for (var i = 0; i < this._resolve.length; i++) {
+            typeof this._resolve[i] === 'function' && this._resolve[i](data)
+        } 
+        typeof this._finally === 'function' && this._finally() 
     }).bind(this)
     var reject = (function (err) {
-        this._state = 'reject'
-        typeof this._catch === 'function' ? this._catch(err) : (typeof this._reject === 'function' && this._reject(data) && this._reject(err))
-        return this
+        if (this._state !== 'pendding') throw new Error('State Can Not Be Modify!')
+        this._state = 'rejected'
+        typeof this._catch === 'function' ? this._catch(err) : (typeof this._reject === 'function' && this._reject(err))
+        typeof this._finally === 'function' && this._finally() 
     }).bind(this)
     fn.call(this, resolve, reject)
-    typeof this._finally === 'function' && this._finally() 
 }
 Async.prototype.then = function (resolve, reject) {
-    this._resolve = resolve
+    this._resolve.push(resolve)
     this._reject = reject
+    return this
 }
 Async.prototype.catch = function (reject) {
     this._catch = reject
+    return this
 }
 Async.prototype.finally = function (cb) {
     this._finally = cb
