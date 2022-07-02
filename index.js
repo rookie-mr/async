@@ -1,6 +1,6 @@
 var Async = function (fn) {
     this.name = 'Async'
-    this._state = 'pendding'
+    this._state = 'pending'
     if (typeof fn !== 'function') {
         throw new Error('The Param Of Async Must Be Typeof Function !')
         return null
