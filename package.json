@@ -1,6 +1,6 @@
 {
   "name": "normal-async",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Promise 语法糖可用于不支持Promise的浏览器环境，与Promise遵循一致的语法规则。",
   "main": "index.js",
   "scripts": {
